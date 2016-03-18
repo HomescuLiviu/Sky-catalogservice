@@ -1,6 +1,7 @@
-package services;
+package skycatalog.services;
 
-import entities.CatalogueProduct;
+import org.springframework.stereotype.Component;
+import skycatalog.entities.CatalogueProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 /**
  * Created by liviu on 3/18/2016.
  */
+@Component
 public class CatalogueServiceImpl implements CatalogueService {
 
     private static final List<CatalogueProduct> CATALOGUE_PRODUCTS = new ArrayList<>();

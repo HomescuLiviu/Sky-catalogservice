@@ -1,6 +1,6 @@
-package services;
+package skycatalog.services;
 
-import exception.LocationIdNotFoundException;
+import skycatalog.exception.LocationIdNotFoundException;
 
 /**
  * Created by liviu on 3/18/2016.

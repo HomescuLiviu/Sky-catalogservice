@@ -1,6 +1,6 @@
-package services;
+package skycatalog.services;
 
-import exception.LocationIdNotFoundException;
+import skycatalog.exception.LocationIdNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

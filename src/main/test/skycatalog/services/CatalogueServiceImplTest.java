@@ -1,4 +1,4 @@
-package services;
+package skycatalog.services;
 
 import org.junit.Test;
 
