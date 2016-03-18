@@ -30,4 +30,5 @@ dependencies {
     testCompile('junit:junit:4.4')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("jstl:jstl:1.2")
 }
