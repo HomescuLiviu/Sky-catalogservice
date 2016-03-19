@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import skycatalog.entities.CatalogueProduct;
 import skycatalog.exception.LocationIdNotFoundException;
 import skycatalog.services.CatalogueServiceImpl;
@@ -26,9 +27,9 @@ public class CatalogueController {
     private CatalogueServiceImpl catalogueService;
 
     @RequestMapping("/checkout")
-    public String confirmationPage(Model model, @RequestHeader("customerID") String customerID){
-
+    public String confirmationPage(Model model, @RequestHeader("customerID") String customerID, @RequestParam(value="selectedProducts") List<String> selectedProducts){
         model.addAttribute("customerID", customerID);
+        model.addAttribute("selectedProducts", selectedProducts);
         return "confirmation";
     }
 
@@ -49,7 +50,7 @@ public class CatalogueController {
         productList.stream().forEach((product) -> categories.add(((CatalogueProduct)product).getCategory()));
 
         model.addAttribute("productList", productList);
-
+        model.addAttribute("customerID", customerId);
         model.addAttribute("categories", categories);
         return "productSelection";
     }

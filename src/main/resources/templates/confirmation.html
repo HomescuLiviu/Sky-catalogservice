@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head >
-    <title>Confirmation</title>
-</head>
-<body>
 
-    <h1> Congratulations ${customerID}! You have selected :</h1>
+<table>
+    <tr>
+        <td>
+            Congratulations
+        </td>
+        <td th:text="${customerID}">
+        </td>
 
-</body>
-</html>
+        <td>
+            You have selected :
+        </td>
+    </tr>
+    <tr th:each="product : ${selectedProducts}">
+        <td th:text="${product}">
+        </td>
+    </tr>
+</table>

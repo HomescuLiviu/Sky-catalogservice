@@ -1,11 +1,11 @@
 function sendDataToUrl(url, customerID, resultDiv, resultparser){
-        $.ajax({
-            url: url,
-            headers: { customerID: customerID},
-            success: function(result){
-                $(resultDiv).html(result);
-                resultparser(resultDiv);
-            }});
+    $.ajax({
+        url: url,
+        headers: { customerID: customerID},
+        success: function(result){
+            $(resultDiv).html(result);
+            resultparser(resultDiv);
+        }});
 }
 
 function parseScenario1(resultDiv){
@@ -82,13 +82,12 @@ function parseScenario5(resultDiv){
     }
     listOfErrors = selectTwoProducts(listOfErrors, "prod_6", " prod_7", "Sky News", "Sky Sport News");
 
-    checkoutProductsAndUpdateStatus(listOfErrors, "Test passes :<br> Customer without location <br> can add only default products" ,"customer_not_exists","Sky News", "Sky Sport News");
+    setTimeout(function () {checkoutProductsAndUpdateStatus(listOfErrors, "Test passes :<br> Customer without location <br> can add only default products" ,"customer_not_exists","Sky News", "Sky Sport News");}, 10 * 1000);
 
 }
 
 function checkoutProductsAndUpdateStatus(previousListOfErrors, successMessage, customerID, firstProductName, secondProductName){
     var listOfErrors = checkoutProducts(previousListOfErrors, customerID, firstProductName, secondProductName);
-
     updateTestStatus(listOfErrors, successMessage);
 }
 
@@ -99,13 +98,13 @@ function checkoutProducts(previousListOfErrors, customerID, firstProductName, se
          return listOfErrors;
     }
     $("input[id=checkout]").click();
-    if ($("resulttext").text().indexOf(firstProductName) <0) {
+    if ($("#resulttext").text().indexOf(firstProductName) <0) {
             listOfErrors = listOfErrors.concat("<br>Confirmation page did not contain product : "+firstProductName);
     }
-    if ($("resulttext").text().indexOf(secondProductName) <0) {
+    if ($("#resulttext").text().indexOf(secondProductName) <0) {
             listOfErrors = listOfErrors.concat("<br>Confirmation page did not contain product : "+secondProductName);
     }
-    if ($("resulttext").text().indexOf(customerID) <0) {
+    if ($("#resulttext").text().indexOf(customerID) <0) {
                 listOfErrors = listOfErrors.concat("<br>Confirmation page did not contain customerID : "+customerID);
     }
     return listOfErrors;
@@ -113,7 +112,7 @@ function checkoutProducts(previousListOfErrors, customerID, firstProductName, se
 }
 
 function updateTestStatus(listOfErrors, successText){
-alert(listOfErrors);
+
     if (listOfErrors.length <= 0){
             $("#success").html(successText);
         } else {

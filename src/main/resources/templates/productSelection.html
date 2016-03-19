@@ -8,6 +8,12 @@
     <title>Product Selection</title>
 </head>
 <body>
+
+<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+
+
+<div id="customerID" hidden="true"  th:value="${customerID}" th:text="${customerID}"></div>
+<div id="content">
     <table>
         <tr >
             <th th:each="category : ${categories}" th:text="${category}">
@@ -32,13 +38,13 @@
 
                 </ul>
                 <br/>
-                <input id="checkout" type="button" value="Checkout" onclick="alert('checkout');"/>
+                <input id="checkout" type="button" value="Checkout" onclick="sendCheckout()"/>
             </td>
         </tr>
-    </table>   .
-    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
-    <script type="text/javascript">
-
+    </table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
         $('.productcheckbox').click(function() {
         if (this.checked == false){
             $("li[id="+this.id+"]").remove();
@@ -47,9 +53,26 @@
            $("#basket").append("<li id="+this.id+">"+ this.value+"</li>");
          }
         });
+    function sendCheckout(){
+        var parameters = $("#basket").find("li")[0].textContent;
+        var parameterLength = $("#basket").find("li").length;
+        var i = 1;
+        while (i < parameterLength){
+               parameters = parameters.concat(",").concat($("#basket").find("li")[i].textContent);
+               i++;
+        }
 
+        var url = 'http://'+window.location.hostname+':8082/checkout?selectedProducts='.concat(parameters);
 
+      $.ajax({
+        url: url,
+        headers: { customerID: $("#customerID").text()},
+        success: function(result){
+          $('#content').html(result);
+        }});
 
+     }
+     //]]>
     </script>
 </body>
 </html>
