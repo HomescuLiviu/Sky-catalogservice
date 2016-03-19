@@ -11,15 +11,17 @@ table {
 
 
 #success {
+    width : 400px;
     text-align: center;
     color: green;
-    right: 600px;
+    right: 400px;
     position: absolute;
 }
 
-#error {
+#errors {
+    width : 400px;
     text-align: center;
     color: red;
-    right: 600px;
+    right: 400px;
     position: absolute;
 }

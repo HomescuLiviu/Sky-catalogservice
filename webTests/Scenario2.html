@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="css/webtests.css"/>
-    <title>Scenario 1</title>
+    <title>Scenario 2</title>
 </head>
 <body>
-<h1> Scenario 1 : Customer with a wrong location can see default products</h1>
+<h1> Scenario 2 : Customer with a correct location can see default and his products</h1>
     <table>
         <tr>
             <td id="success"></td>
@@ -22,7 +22,7 @@
     <script src="js/testing.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-    sendDataToUrl("http://localhost:8082/productSelection", "customer_notExists", "#resulttext" , parseScenario1);
+    sendDataToUrl("http://localhost:8082/productSelection", "customerR", "#resulttext" , parseScenario2);
 
 
     </script>
