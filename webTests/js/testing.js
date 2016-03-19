@@ -89,7 +89,7 @@ function selectTwoProductsAndCheckout(listOfPreviousErrors){
     $('#check_1_product_1').attr('checked', true);
     $('#check_2_product_1').attr('checked', true);
     if ($('basket').text().indexOf($('#categ_1_product_1').text()) <=0) {
-            listOfErrors = listOfErrors.concat("<br>Coult not add products to basket");
+            listOfErrors = listOfErrors.concat("<br>Customer cannot add products to basket");
     } else {
         sendDataToUrl("http://localhost:8082/productSelection", "customerR", "#resulttext" , checkConfirmationPage);
     }
