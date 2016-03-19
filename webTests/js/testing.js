@@ -52,7 +52,10 @@ function parseScenario3(resultDiv){
     if ($(resultDiv).text().indexOf("Sky Sport News") <= 0){
         listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
     }
-    selectTwoProductsAndUpdateStatus(listOfErrors, "prod_1", " prod_6", "Arsenal TV", "Sky News", "Test passes :<br> Customer can add products <br> only for LONDON and the default products");
+    listOfErrors = selectTwoProducts(listOfErrors, "prod_1", " prod_6", "Arsenal TV", "Sky News");
+
+    updateTestStatus(listOfErrors, "Test passes :<br> Customer can add products <br> only for LONDON and the default products");
+
 }
 
 
@@ -64,22 +67,61 @@ function parseScenario4(resultDiv){
     if ($(resultDiv).text().indexOf("Sky Sport News") <= 0){
         listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
     }
-    selectTwoProductsAndUpdateStatus(listOfErrors, "prod_6", " prod_7", "Sky News", "Sky Sport News", "Test passes :<br> Customer without location <br> can add only default products");
+    listOfErrors = selectTwoProducts(listOfErrors, "prod_6", " prod_7", "Sky News", "Sky Sport News");
+
+    updateTestStatus(listOfErrors, "Test passes :<br> Customer without location <br> can add only default products");
 }
 
-function checkConfirmationPage(){
+function parseScenario5(resultDiv){
+    var listOfErrors = '';
+    if ($(resultDiv).text().indexOf("Sky News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky News");
+    }
+    if ($(resultDiv).text().indexOf("Sky Sport News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
+    }
+    listOfErrors = selectTwoProducts(listOfErrors, "prod_6", " prod_7", "Sky News", "Sky Sport News");
+
+    checkoutProductsAndUpdateStatus(listOfErrors, "Test passes :<br> Customer without location <br> can add only default products" ,"customer_not_exists","Sky News", "Sky Sport News");
+
+}
+
+function checkoutProductsAndUpdateStatus(previousListOfErrors, successMessage, customerID, firstProductName, secondProductName){
+    var listOfErrors = checkoutProducts(previousListOfErrors, customerID, firstProductName, secondProductName);
+
+    updateTestStatus(listOfErrors, successMessage);
+}
+
+function checkoutProducts(previousListOfErrors, customerID, firstProductName, secondProductName){
+    var listOfErrors = previousListOfErrors;
+    if (typeof $("input[id=checkout]").text() == 'undefined' ) {
+         listOfErrors = listOfErrors.concat("<br>Checkout button is missing or not working properly");
+         return listOfErrors;
+    }
+    $("input[id=checkout]").click();
+    if ($("resulttext").text().indexOf(firstProductName) <0) {
+            listOfErrors = listOfErrors.concat("<br>Confirmation page did not contain product : "+firstProductName);
+    }
+    if ($("resulttext").text().indexOf(secondProductName) <0) {
+            listOfErrors = listOfErrors.concat("<br>Confirmation page did not contain product : "+secondProductName);
+    }
+    if ($("resulttext").text().indexOf(customerID) <0) {
+                listOfErrors = listOfErrors.concat("<br>Confirmation page did not contain customerID : "+customerID);
+    }
+    return listOfErrors;
 
 }
 
 function updateTestStatus(listOfErrors, successText){
+alert(listOfErrors);
     if (listOfErrors.length <= 0){
-             $("#success").html(successText);
+            $("#success").html(successText);
         } else {
             $("#errors").html(listOfErrors);
         }
 }
 
-function selectTwoProductsAndUpdateStatus(listOfPreviousErrors, firstProduct , secondProduct, firstProductName, secondProductName, successMessage){
+function selectTwoProducts(listOfPreviousErrors, firstProduct , secondProduct, firstProductName, secondProductName){
     var listOfErrors = listOfPreviousErrors;
     $("input[id="+firstProduct+"]").click();
     $("input[id="+secondProduct+"]").click();
@@ -90,11 +132,6 @@ function selectTwoProductsAndUpdateStatus(listOfPreviousErrors, firstProduct , s
     if ($("li[id="+secondProduct+"]").text().indexOf(secondProductName) <0) {
             listOfErrors = listOfErrors.concat("<br>Customer cannot add "+secondProductName+" to basket");
     }
-
-    updateTestStatus(listOfErrors, successMessage);
-}
-
-function checkout(){
-     sendDataToUrl("http://localhost:8082/productSelection", "customerR", "#resulttext" , checkConfirmationPage);
+    return listOfErrors;
 
 }

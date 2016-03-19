@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css-tests/webtests.css"/>
+    <title>Scenario 5</title>
+</head>
+<body>
+<h1> Scenario 5 : Customer without a location can checkout default products</h1>
+<table>
+    <tr>
+        <td id="success"></td>
+    </tr>
+    <tr>
+        <td id="errors"></td>
+    </tr>
+    <tr>
+        <td id="resulttext"></td>
+    </tr>
+</table>
+
+<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+<script src="js/testing.js" type="text/javascript"></script>
+<script type="text/javascript">
+    sendDataToUrl("http://localhost:8082/productSelection", "customer_not_exists", "#resulttext" , parseScenario5);
+</script>
+
+</body>
+</html>

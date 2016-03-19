@@ -31,7 +31,8 @@
 
 
                 </ul>
-
+                <br/>
+                <input id="checkout" type="button" value="Checkout" onclick="alert('checkout');"/>
             </td>
         </tr>
     </table>   .
@@ -44,10 +45,11 @@
          }
          if (this.checked == true){
            $("#basket").append("<li id="+this.id+">"+ this.value+"</li>");
-
          }
-
         });
+
+
+
     </script>
 </body>
 </html>
