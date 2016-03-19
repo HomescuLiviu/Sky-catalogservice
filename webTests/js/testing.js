@@ -1,15 +1,11 @@
 function sendDataToUrl(url, customerID, resultDiv, resultparser){
-        alert("sending data");
         $.ajax({
             url: url,
             headers: { customerID: customerID},
             success: function(result){
                 $(resultDiv).html(result);
-                alert(resultparser);
                 resultparser(resultDiv);
             }});
-        alert("data sent");
-
 }
 
 function parseScenario1(resultDiv){
@@ -49,10 +45,35 @@ function parseScenario2(resultDiv){
         listOfErrors = listOfErrors.concat("<br>Customer sees products that are not for his locationID");
     }
     updateTestStatus(listOfErrors, "Test passes :<br> Customer can see products <br> only for LONDON and the default products");
+}
 
-    alert("///" + ($(resultDiv).text().indexOf("News") > 0) + "// "+ $(resultDiv).text() );
 
+function parseScenario3(resultDiv){
+    var listOfErrors = '';
+    if ($(resultDiv).text().indexOf("Sky News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky News");
+    }
+    if ($(resultDiv).text().indexOf("Sky Sport News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
+    }
 
+    if ($(resultDiv).text().indexOf("LONDON") <= 0){
+        listOfErrors = listOfErrors.concat("<br>Customer can not see his locationID");
+    }
+
+    if ($(resultDiv).text().indexOf("LIVERPOOL") > 0){
+        listOfErrors = listOfErrors.concat("<br>Customer sees products that are not for his locationID");
+    }
+
+    if ($(resultDiv).text().indexOf("PARIS") > 0){
+        listOfErrors = listOfErrors.concat("<br>Customer sees products that are not for his locationID");
+    }
+
+    selectTwoProductsAndCheckout(listOfErrors);
+}
+
+function checkConfirmationPage(){
+alert("confirmation page");
 }
 
 function updateTestStatus(listOfErrors, successText){
@@ -61,4 +82,19 @@ function updateTestStatus(listOfErrors, successText){
         } else {
             $("#errors").html(listOfErrors);
         }
+}
+
+function selectTwoProductsAndCheckout(listOfPreviousErrors){
+    var listOfErrors = listOfPreviousErrors;
+    $('#check_1_product_1').attr('checked', true);
+    $('#check_2_product_1').attr('checked', true);
+    if ($('basket').text().indexOf($('#categ_1_product_1').text()) <=0) {
+            listOfErrors = listOfErrors.concat("<br>Coult not add products to basket");
+    } else {
+        sendDataToUrl("http://localhost:8082/productSelection", "customerR", "#resulttext" , checkConfirmationPage);
+    }
+
+    updateTestStatus(listOfErrors, "Test passes :<br> Customer can see products <br> only for LONDON and the default products");
+
+    alert(listOfErrors);
 }
