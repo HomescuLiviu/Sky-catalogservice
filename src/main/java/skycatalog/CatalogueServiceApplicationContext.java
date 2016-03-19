@@ -14,4 +14,5 @@ public class CatalogueServiceApplicationContext {
     public static void main(String[] args) throws Throwable {
         SpringApplication.run(CatalogueServiceApplicationContext.class, args);
     }
+
 }
