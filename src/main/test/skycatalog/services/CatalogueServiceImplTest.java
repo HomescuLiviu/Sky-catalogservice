@@ -6,9 +6,6 @@ import java.util.List;
 
 import static junit.framework.Assert.assertTrue;
 
-/**
- * Created by liviu on 3/18/2016.
- */
 public class CatalogueServiceImplTest {
 
     private final CatalogueServiceImpl catalogueService = new CatalogueServiceImpl();

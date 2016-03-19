@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
 
-/**
- * Created by liviu on 3/18/2016.
- */
 public class CustomerLocationServiceStubTest {
 
     private final CustomerLocationServiceStub customerLocationServiceStub = new CustomerLocationServiceStub();

@@ -13,6 +13,22 @@ th {
     background-color: #0066FF;
 }
 
+div {
+    width: 100px;
+    height: 0px;
+    position: relative;
+}
+
+.innertable{
+    position :relative;
+    top:10px;
+    width : 200px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 table, th, td {
    border: 0px solid black;
 }

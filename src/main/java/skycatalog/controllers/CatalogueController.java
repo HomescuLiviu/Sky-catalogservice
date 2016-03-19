@@ -11,11 +11,10 @@ import skycatalog.exception.LocationIdNotFoundException;
 import skycatalog.services.CatalogueServiceImpl;
 import skycatalog.services.CustomerLocationServiceStub;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-/**
- * Created by liviu on 3/18/2016.
- */
 @Controller
 @CrossOrigin(origins = "http://localhost:63342")
 public class CatalogueController {
@@ -44,9 +43,14 @@ public class CatalogueController {
             e.printStackTrace();
         }
 
-        List<CatalogueProduct> productList = catalogueService.getProductsByLocationID(locationId);
+        List productList = catalogueService.getProductsByLocationID(locationId);
+        Set<String> categories = new HashSet<>();
+
+        productList.stream().forEach((product) -> categories.add(((CatalogueProduct)product).getCategory()));
 
         model.addAttribute("productList", productList);
+
+        model.addAttribute("categories", categories);
         return "productSelection";
     }
 

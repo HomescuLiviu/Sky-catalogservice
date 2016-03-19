@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Created by liviu on 3/18/2016.
- */
 @Component
 public class CustomerLocationServiceStub implements CustomerLocationService {
 

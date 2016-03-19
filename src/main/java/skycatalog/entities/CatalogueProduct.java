@@ -1,13 +1,13 @@
-package skycatalog.entities;/**
- * Created by liviu on 3/18/2016.
- */
+package skycatalog.entities;
 public class CatalogueProduct {
 
+    private String id;
     private String category;
     private String name;
     private String locationId;
 
-    public CatalogueProduct(String category, String name, String locationId) {
+    public CatalogueProduct(String id, String category, String name, String locationId) {
+        this.id = id;
         this.category = category;
         this.name = name;
         this.locationId = locationId;
@@ -23,5 +23,9 @@ public class CatalogueProduct {
 
     public String getLocationId() {
         return locationId;
+    }
+
+    public String getId() {
+        return id;
     }
 }

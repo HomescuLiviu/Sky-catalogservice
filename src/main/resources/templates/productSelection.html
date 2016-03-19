@@ -9,21 +9,45 @@
 </head>
 <body>
     <table>
-        <tr>
-            <th> Category </th>
-            <th> Product </th>
-            <th> Dependent on location ID </th>
+        <tr >
+            <th th:each="category : ${categories}" th:text="${category}">
+
+            </th>
+            <th th:text="Basket">
+            </th>
         </tr>
-        <tr th:each="product : ${productList}">
-            <td th:text="${product.category}">1</td>
-            <td th:text="${product.name}">2</td>
-            <td th:text="${product.locationId}">3</td>
+        <tr id="datarows" >
+            <td th:id="${category}" th:each="category : ${categories}" >
+                <table class="innertable">
+                    <tr th:each="product : ${productList}" th:if="${product.category == category}">
+                        <td>
+                            <input th:id="${product.id}" type="checkbox" class="productcheckbox" th:value="${product.name}" th:text="${product.name}"/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <ul id="basket">
+
+
+                </ul>
+
+            </td>
         </tr>
-     </table>   .
+    </table>   .
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-    </script>
+        $('.productcheckbox').click(function() {
+        if (this.checked == false){
+            $("li[id="+this.id+"]").remove();
+         }
+         if (this.checked == true){
+           $("#basket").append("<li id="+this.id+">"+ this.value+"</li>");
 
+         }
+
+        });
+    </script>
 </body>
 </html>

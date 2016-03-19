@@ -7,23 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by liviu on 3/18/2016.
- */
 @Component
 public class CatalogueServiceImpl implements CatalogueService {
 
     private static final List<CatalogueProduct> CATALOGUE_PRODUCTS = new ArrayList<>();
 
     static {
-        CATALOGUE_PRODUCTS.add( new CatalogueProduct("Sports", "Arsenal TV", "LONDON"));
-        CATALOGUE_PRODUCTS.add( new CatalogueProduct("Sports", "Chelsea TV", "LONDON"));
-        CATALOGUE_PRODUCTS.add( new CatalogueProduct("Sports", "Liverpool TV", "LIVERPOOL"));
-        CATALOGUE_PRODUCTS.add( new CatalogueProduct("Sports", "French TV", "PARIS"));
-        CATALOGUE_PRODUCTS.add( new CatalogueProduct("Sports", "More French TV", "PARIS"));
+        CATALOGUE_PRODUCTS.add( new CatalogueProduct("prod_1", "Sports", "Arsenal TV", "LONDON"));
+        CATALOGUE_PRODUCTS.add( new CatalogueProduct("prod_2", "Sports", "Chelsea TV", "LONDON"));
+        CATALOGUE_PRODUCTS.add( new CatalogueProduct("prod_3", "Sports", "Liverpool TV", "LIVERPOOL"));
+        CATALOGUE_PRODUCTS.add( new CatalogueProduct("prod_4", "Sports", "French TV", "PARIS"));
+        CATALOGUE_PRODUCTS.add( new CatalogueProduct("prod_5", "Sports", "More French TV", "PARIS"));
 
-        CATALOGUE_PRODUCTS.add( new CatalogueProduct("News", "Sky News", ""));
-        CATALOGUE_PRODUCTS.add( new CatalogueProduct("News", "Sky Sport News", ""));
+        CATALOGUE_PRODUCTS.add( new CatalogueProduct("prod_6", "News", "Sky News", ""));
+        CATALOGUE_PRODUCTS.add( new CatalogueProduct("prod_7", "News", "Sky Sport News", ""));
     }
 
 

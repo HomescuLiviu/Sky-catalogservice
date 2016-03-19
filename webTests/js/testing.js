@@ -33,10 +33,6 @@ function parseScenario2(resultDiv){
         listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
     }
 
-    if ($(resultDiv).text().indexOf("LONDON") <= 0){
-        listOfErrors = listOfErrors.concat("<br>Customer can not see his locationID");
-    }
-
     if ($(resultDiv).text().indexOf("LIVERPOOL") > 0){
         listOfErrors = listOfErrors.concat("<br>Customer sees products that are not for his locationID");
     }
@@ -56,24 +52,23 @@ function parseScenario3(resultDiv){
     if ($(resultDiv).text().indexOf("Sky Sport News") <= 0){
         listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
     }
+    selectTwoProductsAndUpdateStatus(listOfErrors, "prod_1", " prod_6", "Arsenal TV", "Sky News", "Test passes :<br> Customer can add products <br> only for LONDON and the default products");
+}
 
-    if ($(resultDiv).text().indexOf("LONDON") <= 0){
-        listOfErrors = listOfErrors.concat("<br>Customer can not see his locationID");
+
+function parseScenario4(resultDiv){
+    var listOfErrors = '';
+    if ($(resultDiv).text().indexOf("Sky News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky News");
     }
-
-    if ($(resultDiv).text().indexOf("LIVERPOOL") > 0){
-        listOfErrors = listOfErrors.concat("<br>Customer sees products that are not for his locationID");
+    if ($(resultDiv).text().indexOf("Sky Sport News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
     }
-
-    if ($(resultDiv).text().indexOf("PARIS") > 0){
-        listOfErrors = listOfErrors.concat("<br>Customer sees products that are not for his locationID");
-    }
-
-    selectTwoProductsAndCheckout(listOfErrors);
+    selectTwoProductsAndUpdateStatus(listOfErrors, "prod_6", " prod_7", "Sky News", "Sky Sport News", "Test passes :<br> Customer without location <br> can add only default products");
 }
 
 function checkConfirmationPage(){
-alert("confirmation page");
+
 }
 
 function updateTestStatus(listOfErrors, successText){
@@ -84,17 +79,22 @@ function updateTestStatus(listOfErrors, successText){
         }
 }
 
-function selectTwoProductsAndCheckout(listOfPreviousErrors){
+function selectTwoProductsAndUpdateStatus(listOfPreviousErrors, firstProduct , secondProduct, firstProductName, secondProductName, successMessage){
     var listOfErrors = listOfPreviousErrors;
-    $('#check_1_product_1').attr('checked', true);
-    $('#check_2_product_1').attr('checked', true);
-    if ($('basket').text().indexOf($('#categ_1_product_1').text()) <=0) {
-            listOfErrors = listOfErrors.concat("<br>Customer cannot add products to basket");
-    } else {
-        sendDataToUrl("http://localhost:8082/productSelection", "customerR", "#resulttext" , checkConfirmationPage);
+    $("input[id="+firstProduct+"]").click();
+    $("input[id="+secondProduct+"]").click();
+
+    if ($("li[id="+firstProduct+"]").text().indexOf(firstProductName) <0) {
+            listOfErrors = listOfErrors.concat("<br>Customer cannot add "+firstProductName+" to basket");
+    }
+    if ($("li[id="+secondProduct+"]").text().indexOf(secondProductName) <0) {
+            listOfErrors = listOfErrors.concat("<br>Customer cannot add "+secondProductName+" to basket");
     }
 
-    updateTestStatus(listOfErrors, "Test passes :<br> Customer can see products <br> only for LONDON and the default products");
+    updateTestStatus(listOfErrors, successMessage);
+}
 
-    alert(listOfErrors);
+function checkout(){
+     sendDataToUrl("http://localhost:8082/productSelection", "customerR", "#resulttext" , checkConfirmationPage);
+
 }
