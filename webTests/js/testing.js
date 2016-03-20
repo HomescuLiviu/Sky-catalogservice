@@ -82,7 +82,21 @@ function parseScenario5(resultDiv){
     }
     listOfErrors = selectTwoProducts(listOfErrors, "prod_6", " prod_7", "Sky News", "Sky Sport News");
 
-    setTimeout(function () {checkoutProductsAndUpdateStatus(listOfErrors, "Test passes :<br> Customer without location <br> can add only default products" ,"customer_not_exists","Sky News", "Sky Sport News");}, 10 * 1000);
+    setTimeout(function () {checkoutProductsAndUpdateStatus(listOfErrors, "Test passes :<br> Customer without location <br> can order only default products" ,"customer_not_exists","Sky News", "Sky Sport News");}, 10 * 1000);
+
+}
+
+function parseScenario6(resultDiv){
+    var listOfErrors = '';
+    if ($(resultDiv).text().indexOf("Sky News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky News");
+    }
+    if ($(resultDiv).text().indexOf("Sky Sport News") <= 0){
+        listOfErrors = listOfErrors.concat("<br>User with no location id can not see Sky Sport News");
+    }
+    listOfErrors = selectTwoProducts(listOfErrors, "prod_4", " prod_7", "French TV", "Sky Sport News");
+
+    setTimeout(function () {checkoutProductsAndUpdateStatus(listOfErrors, "Test passes :<br> Customer with location <br> can order default and Paris products" ,"customerY","French TV", "Sky Sport News");}, 10 * 1000);
 
 }
 
