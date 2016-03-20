@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin()
 public class CatalogueController {
 
     @Autowired
