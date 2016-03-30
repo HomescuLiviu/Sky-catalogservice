@@ -6,6 +6,11 @@ git clone git@github.com:HomescuLiviu/Sky-catalogservice.git
 # Run
 gradlew spring-boot:run
 
+Usage : 
+
+URL : "http://localhost:8082/productSelection"
+Mandatory cookie : "customerID"
+
 Sky-catalogservice is a web application that allows customers to select and checkout products based on their location.
 
 Tha app was developed in Intellij and build with Gradle.
@@ -35,3 +40,4 @@ Each test has a description on top, a test action in the middle and a test resul
 the tests have been run on Google Chrome.
 
 All the above tests are in "/webtests".
+
